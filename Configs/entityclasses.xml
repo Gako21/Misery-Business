@@ -1,6 +1,7 @@
 <configs>
 
 	<!-- Player -->
+	<!-- 		-->
 	
 	<!-- Random -->
 	<remove xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@value='@_vehicleFood']"/>
@@ -31,56 +32,76 @@
 
 
 	<!-- Zombies -->
+	<!-- 		 -->
 	
 	<!-- Template -->
 	
-	<!-- Falling/breaking/knocking -->
-	<remove xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@class='FallLandBehavior']/property[@name='1Land' or @name='1LandLow' or @name='1Stumble' or @name='LowStumble' or @name='MidStumble' or @name='MidLandHard' or @name='MidLandHardAndRage' or @name='Ragdoll']"/>
-	<remove xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@class='DestroyBlockBehavior']/property[@name='Ragdoll']"/>
+		<!-- Falling/breaking/knocking -->
+		<remove xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@class='FallLandBehavior']/property[@name='1Land' or @name='1LandLow' or @name='1Stumble' or @name='LowStumble' or @name='MidStumble' or @name='MidLandHard' or @name='MidLandHardAndRage' or @name='Ragdoll']"/>
+		<remove xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@class='DestroyBlockBehavior']/property[@name='Ragdoll']"/>
 	
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@class='FallLandBehavior']/property[@name='MidStumbleAndRage']/@data">anim=Stumble;height=3,5;weight=0.3;ragePer=2;rageTime=5</set>
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@class='FallLandBehavior']/property[@name='HighStumbleAndRage']/@data">anim=Stumble;height=5,13;weight=0.13;ragePer=3;rageTime=10</set>
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@class='DestroyBlockBehavior']/property[@name='None']/@data">weight=0.2</set>
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='KnockdownProneDamageThreshold']/@value">0</set>
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='KnockdownKneelDamageThreshold']/@value">0</set>
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@class='FallLandBehavior']/property[@name='MidStumbleAndRage']/@data">anim=Stumble;height=3,5;weight=0.3;ragePer=2;rageTime=5</set>
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@class='FallLandBehavior']/property[@name='HighStumbleAndRage']/@data">anim=Stumble;height=5,13;weight=0.13;ragePer=3;rageTime=10</set>
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@class='DestroyBlockBehavior']/property[@name='None']/@data">weight=0.2</set>
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='KnockdownProneDamageThreshold']/@value">0</set>
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='KnockdownKneelDamageThreshold']/@value">0</set>
+		
+		<!-- Senses -->
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='AIFeralSense']/@value">2</set>
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='SightLightThreshold']/@value">0,100</set>
+		
+		<!-- Combat -->
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='PainResistPerHit']/@value">.75</set>
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='MoveSpeedAggro']/@value">.3, 1.3</set>
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='MoveSpeedRand']/@value">0, .25</set>
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='AttackTimeoutDay']/@value">1.1</set>
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='AttackTimeoutNight']/@value">.8</set>
+		
+		<!-- Combat feral and radiated -->
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/property[@name='PainResistPerHit']/@value">.85</set>
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/property[@name='PainResistPerHit']/@value">.95</set>
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/effect_group/triggered_effect[@cvar='RadiatedRegenAmount']/@value">10</set>
+		
+		<!-- Health -->
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/effect_group/passive_effect[@name='HealthMax' and @operation='base_set']/@value">200</set>
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/effect_group/passive_effect[@name='HealthMax' and @operation='perc_add']/@value">0,.2</set>
+		
+		<!-- Exp -->
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='ExperienceGain']/@value">300</set>
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/property[@name='ExperienceGain']/@value">600</set>
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/property[@name='ExperienceGain']/@value">900</set>
+		
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='TimeStayAfterDeath']/@value">10</set>
+		
+		<!-- Dismemberment -->
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/property[contains(@name, 'DismemberMultiplier') and not (@value='0')]/@value">.5</set>
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/property[contains(@name, 'DismemberMultiplier') and not (@value='0')]/@value">.2</set>
 	
-	<!-- Senses -->
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='AIFeralSense']/@value">2</set>
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='SightLightThreshold']/@value">0,100</set>
 	
-	<!-- Combat -->
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='PainResistPerHit']/@value">.75</set>
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='MoveSpeedAggro']/@value">.3, 1.3</set>
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='MoveSpeedRand']/@value">0, .25</set>
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='AttackTimeoutDay']/@value">1.1</set>
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='AttackTimeoutNight']/@value">.8</set>
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='ExperienceGain']/@value">300</set>
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='TimeStayAfterDeath']/@value">10</set>
+	<!-- Slim zombies -->
 	
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/effect_group/passive_effect[@name='HealthMax' and @operation='base_set']/@value">200</set>
-	<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/effect_group/passive_effect[@name='HealthMax' and @operation='perc_add']/@value">0,.2</set>
+		<set xpath="/entity_classes/entity_class/effect_group/passive_effect[@name='HealthMax' and @value='125']/@value">150</set>
+		<set xpath="/entity_classes/entity_class/property[@name='MoveSpeedAggro' and @value='0.3, 1.35']/@value">.4, 1.4</set>
 	
-	<set xpath="/entity_classes/entity_class/effect_group/passive_effect[@name='HealthMax' and @value='125']/@value">150</set>
-	<set xpath="/entity_classes/entity_class/property[@name='MoveSpeedAggro' and @value='0.3, 1.35']/@value">.4, 1.4</set>
+		<!-- Feral  -->
+		
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/property[@name='MoveSpeedAggro' and @value='0.6, 1.45']/@value">.8, 1.5</set>
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/effect_group/passive_effect[@name='HealthMax' and @value='237']/@value">300</set>
+		
+		<!-- Radiated -->
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/effect_group/passive_effect[@name='HealthMax' and @value='451']/@value">500</set>
+		
+	<!-- Normal zombies -->
 	
-	<set xpath="/entity_classes/entity_class/effect_group/passive_effect[@name='HealthMax' and @value='150']/@value">200</set>
+		<set xpath="/entity_classes/entity_class/effect_group/passive_effect[@name='HealthMax' and @value='150']/@value">200</set>
 	
-	<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/property[contains(@name, 'DismemberMultiplier') and not (@value='0')]/@value">.5</set>
-	<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/property[@name='PainResistPerHit']/@value">.85</set>
-	<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/property[@name='MoveSpeedAggro' and @value='0.6, 1.45']/@value">.8, 1.5</set>
-	<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/property[@name='ExperienceGain']/@value">600</set>
-	<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/effect_group/passive_effect[@name='HealthMax' and @value='237']/@value">300</set>
+		<!-- Feral -->
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/property[@name='MoveSpeedAggro' and @value='.5, 1.35']/@value">.7, 1.4</set>
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/effect_group/passive_effect[@name='HealthMax' and @value='285']/@value">350</set>
+		
+		<!-- Radiated -->
 	
-	<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/property[@name='MoveSpeedAggro' and @value='.5, 1.35']/@value">.7, 1.4</set>
-	<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/effect_group/passive_effect[@name='HealthMax' and @value='285']/@value">350</set>
-	
-	<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/property[contains(@name, 'DismemberMultiplier') and not (@value='0')]/@value">.2</set>
-	<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/property[@name='PainResistPerHit']/@value">.95</set>
-	<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/effect_group/triggered_effect[@cvar='RadiatedRegenAmount']/@value">10</set>
-	<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/property[@name='ExperienceGain']/@value">900</set>
-	<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/effect_group/passive_effect[@name='HealthMax' and @value='451']/@value">500</set>
-	
-	<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/effect_group/passive_effect[@name='HealthMax' and @value='541']/@value">600</set>
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/effect_group/passive_effect[@name='HealthMax' and @value='541']/@value">600</set>
 	
 	
 	
