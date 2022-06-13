@@ -42,7 +42,7 @@
 	<!-- Food -->
 	<!-- 	  -->
 	
-	<!-- Old Sham Sandwich -->
+	<!-- Dysentery Chances -->
 	<append xpath="/items/item[not (@name='foodShamSandwich') and not (@name='foodRawMeat') and not (@name='foodRottingFlesh')]/effect_group[@name='Food Tier 0']">
 		<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar=".DiseaseRoll" operation="set" value="15"/><display_value name="dDysenteryRisk" value=".15"/>
 		<triggered_effect trigger="onSelfPrimaryActionEnd" action="ModifyCVar" cvar=".DiseaseRoll" operation="add" value="@$MetabolismResist"/>
@@ -51,15 +51,21 @@
 		</triggered_effect>
 	</append>
 	
-	<set xpath="/items/item[@name='foodShamSandwich']/effect_group/triggered_effect[@cvar='$foodAmountAdd']/@value">15</set>
-	<set xpath="/items/item[@name='foodShamSandwich' or @name='foodRawMeat']/effect_group/triggered_effect[@operation='set']/@value">24</set>
-	<set xpath="/items/item[@name='foodShamSandwich' or @name='foodRawMeat']/effect_group/display_value[@name='dDysenteryRisk']/@value">.24</set>
-	
 	<!-- Tier 0 Food -->
 	<set xpath="/items/item/effect_group[@name='Food Tier 0']/triggered_effect[@cvar='$foodAmountAdd']/@value">8</set>
 	<set xpath="/items/item/effect_group[@name='Food Tier 0']/triggered_effect[@cvar='foodHealthAmount']/@value">4</set>
 	<set xpath="/items/item/effect_group[@name='Food Tier 0']/triggered_effect[@cvar='$waterAmountAdd']/@value">7</set>
 	<setattribute xpath="/items/item/effect_group[@name='Food Tier 0']/.." name="EconomicValue">50</setattribute>
+	
+	<!-- Fix crops back to normal -->
+	<set xpath="/items/item/property[@name='Material' and @value='MresourceCrop']/../effect_group[@name='Food Tier 0']/triggered_effect[@cvar='$foodAmountAdd']/@value">2</set>
+	<set xpath="/items/item/property[@name='Material' and @value='MresourceCrop']/../effect_group[@name='Food Tier 0']/triggered_effect[@cvar='foodHealthAmount']/@value">1</set>
+	<set xpath="/items/item/property[@name='Material' and @value='MresourceCrop']/../effect_group[@name='Food Tier 0']/triggered_effect[@cvar='$waterAmountAdd']/@value">0</set>
+	
+	<!-- Old Sham Sandwich -->
+	<set xpath="/items/item[@name='foodShamSandwich']/effect_group/triggered_effect[@cvar='$foodAmountAdd']/@value">15</set>
+	<set xpath="/items/item[@name='foodShamSandwich' or @name='foodRawMeat']/effect_group/triggered_effect[@operation='set']/@value">24</set>
+	<set xpath="/items/item[@name='foodShamSandwich' or @name='foodRawMeat']/effect_group/display_value[@name='dDysenteryRisk']/@value">.24</set>
 	
 	<!-- Raw Meats -->
 	<set xpath="/items/item[@name='foodRawMeat']/effect_group/triggered_effect[@cvar='$foodAmountAdd']/@value">4</set>

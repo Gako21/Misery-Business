@@ -8,7 +8,8 @@
 
 	<set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='HealthChangeOT']/@value">0.01</set>
 	<set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='DismemberChance']/@value">0</set>
-	<set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='DegradationPerUse']/@value">1.5</set>
+	<set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='DegradationPerUse']/@operation">perc_add</set>
+	<set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='DegradationPerUse']/@value">.5</set>
 	<set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='CarryCapacity']/@value">18</set>
 	<set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='PlayerExpGain']/@value">3</set>
 	
@@ -54,8 +55,6 @@
 		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='PainResistPerHit']/@value">.75</set>
 		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='MoveSpeedAggro']/@value">.3, 1.3</set>
 		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='MoveSpeedRand']/@value">0, .25</set>
-		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='AttackTimeoutDay']/@value">1.1</set>
-		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='AttackTimeoutNight']/@value">.8</set>
 		
 		<!-- Combat feral and radiated -->
 		<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/property[@name='PainResistPerHit']/@value">.85</set>
