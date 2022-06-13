@@ -1,0 +1,23 @@
+<configs>
+
+	<!-- Medical -->
+	
+	<set xpath="/buffs/buff[@name='buffDrugPainkillers']/effect_group/passive_effect[@name='WaterChangeOT']/@value">0.109</set>
+	<set xpath="/buffs/buff[@name='buffDrugPainkillers']/effect_group/triggered_effect[@value='40']/@value">15</set>
+	
+	<set xpath="/buffs/buff[@name='buffDrugRecog']/effect_group/passive_effect[@name='EntityDamage']/@value">.3</set>
+	
+	<set xpath="/buffs/buff[@name='buffDrugFortBites']/effect_group/passive_effect[@name='HealthLoss']/@value">-.25</set>
+	
+	<!-- Drink -->
+	
+	<set xpath="/buffs/buff[@name='buffMegaCrush']/effect_group/passive_effect[@name='RunSpeed']/@value">.3</set>
+	
+	<set xpath="/buffs/buff[@name='buffBeer']/effect_group/passive_effect[@name='EntityDamage']/@value">1</set>
+	<set xpath="/buffs/buff[@name='buffBeer']/effect_group/triggered_effect[@intensity='0.3']/@intensity">.5</set>
+	
+	<set xpath="/buffs/buff[@name='buffDrunkGrandpasMoonshine']/effect_group/passive_effect[@name='EntityDamage']/@value">1.5</set>
+	<set xpath="/buffs/buff[@name='buffDrunkGrandpasMoonshine']/effect_group/passive_effect[@name='StaminaChangeOT']/@value">.4</set>
+	<set xpath="/buffs/buff[@name='buffDrunkGrandpasMoonshine']/effect_group/passive_effect[@name='HealthChangeOT']/@value">4.17</set>
+
+</configs>
