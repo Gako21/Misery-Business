@@ -24,3 +24,9 @@ Some of the main modifications for items include:
 - Reduced duration and intensity of various medical items
 - Lowered food, water and health gains on most, if not all, foods and drinks
 - Added dysentery chance to canned food
+
+
+Things I have yet to do:
+- Modify stat display for canned foods with water in them.
+- Modify quest rewards.
+- Modify some loot containers.
