@@ -30,6 +30,16 @@
 	<set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='WaterChangeOT']/@value">0.015</set>
 	<set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='FoodChangeOT']/@value">0.011</set>
 	<set xpath="/entity_classes/entity_class[@name='playerMale']/effect_group/passive_effect[@name='FoodLossPerStaminaPointGained']/@value">0.005</set>
+	
+	<!-- Screamer mechanic -->
+	<append xpath="/entity_classes/entity_class[@name='playerMale']">
+		<effect_group>
+			<requirement name="HoldingItemHasTags" tags="ranged"/>
+			<requirement name="EntityTagCompare" target="other" tags="screamer"/>
+			<triggered_effect trigger="onSelfAttackedOther" target="self" action="Ragdoll" force="50"/>
+			<triggered_effect trigger="onSelfAttackedOther" target="self" action="ShowToolbeltMessage" message="Hit it!"/>
+		</effect_group>
+	</append>
 
 
 	<!-- Zombies -->
@@ -75,6 +85,14 @@
 		<!-- Dismemberment -->
 		<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/property[contains(@name, 'DismemberMultiplier') and not (@value='0')]/@value">.5</set>
 		<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/property[contains(@name, 'DismemberMultiplier') and not (@value='0')]/@value">.2</set>
+		
+		<!-- Screamers -->
+		<append xpath="/entity_classes/entity_class[contains(@name, 'Screamer')]/property[@name='Tags']/@value">,screamer</append>
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Screamer')]/effect_group/passive_effect[@name='HealthMax']/@value">150</set>
+		
+		<!-- Crawlers -->
+		<set xpath="/entity_classes/entity_class[@name='zombieSteveCrawler']/effect_group/passive_effect[@name='HealthMax']/@value">150</set>
+		<set xpath="/entity_classes/entity_class[@name='zombieSteveCrawlerFeral']/effect_group/passive_effect[@name='HealthMax']/@value">300</set>
 	
 	
 	<!-- Slim zombies -->
@@ -102,7 +120,9 @@
 	
 		<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/effect_group/passive_effect[@name='HealthMax' and @value='541']/@value">600</set>
 	
+	<!-- Container -->
 	
-	
+	<set xpath="/entity_classes/entity_class[contains(@name, 'EntityLootContainer')]/property[@name='TimeStayAfterDeath']/@value">3600</set>
+
 	
 </configs>
