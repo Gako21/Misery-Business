@@ -7,7 +7,7 @@ Some of the main modifications for the player include:
 - Lower movement speed.
 - Lower stamina and health regeneration.
 - Higher food and water consumption.
-- Lower carrying capacity (before being overweight).
+- Lower carrying capacity (before being encumbered).
 
 Some of the main modifications for zombies include:
 - Removed knockdown completely
