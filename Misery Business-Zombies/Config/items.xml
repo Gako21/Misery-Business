@@ -1,0 +1,11 @@
+<configs>
+	
+	<!-- Zombie hand -->
+	
+	<append xpath="/items/item[contains(@name, 'meleeHandZombie')]/effect_group">
+		<triggered_effect trigger="onSelfAttackedOther" action="AddBuff" target="other" fireOneBuff="true"
+		buff="buffFatiguedTrigger,buffArmSprainedCHTrigger,buffLegSprainedCHTrigger,buffLaceration,buffAbrasionCatch,buffInjuryStunned01CHTrigger,buffInjuryBleedingTwo"
+		weights=".11,.07,.07,.05,.29,.36,.11"/>
+	</append>	
+	
+</configs>
