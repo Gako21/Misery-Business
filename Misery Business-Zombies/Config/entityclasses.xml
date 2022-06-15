@@ -34,9 +34,10 @@
 		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/effect_group/passive_effect[@name='HealthMax' and @operation='perc_add']/@value">0,.2</set>
 		
 		<!-- Exp -->
-		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='ExperienceGain']/@value">300</set>
-		<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/property[@name='ExperienceGain']/@value">600</set>
-		<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/property[@name='ExperienceGain']/@value">900</set>
+		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='ExperienceGain']/@value | /entity_classes/entity_class/property[@name='ExperienceGain'][@value='400']/@value">300</set>
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Feral')]/property[@name='ExperienceGain']/@value | /entity_classes/entity_class/property[@name='ExperienceGain'][@value='750']/@value">600</set>
+		<set xpath="/entity_classes/entity_class[contains(@name, 'Radiated')]/property[@name='ExperienceGain']/@value | /entity_classes/entity_class/property[@name='ExperienceGain'][@value='1200']/@value">900</set>
+		
 		
 		<set xpath="/entity_classes/entity_class[@name='zombieTemplateMale']/property[@name='TimeStayAfterDeath']/@value">10</set>
 		
