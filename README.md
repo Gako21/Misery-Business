@@ -1,5 +1,5 @@
 # Misery-Business
-This mod aims to make the survival in 7 Days to Die a bit harder. The purpose isn't really to create new mechanics into the game but to make the player think other ways of doing things that could be more efficient. The player character isn't as fitted for the survival whereas the zombies are more fierce. Items aren't often as effective and many buffs have been weakened. Overall, things are looking quite a bit more miserable.
+This mod aims to make the survival in 7 Days to Die a bit harder. The purpose isn't really to create new mechanics into the game but to make the player think other ways of doing things that could be more efficient. The player character isn't as fitted for the survival whereas the zombies are more fierce. Items aren't often as effective and many buffs have been weakened. Traderes require more quests to advande and the rewards are usually worse. Overall, things are looking quite a bit more miserable.
 
 This modpack is completely Xml-based, which means it can be installed into a server without requiring the users do the same; it's a server-side mod. It is also divided into smaller sections for you to easily choose which parts of it you want to include in your game.
 
@@ -25,8 +25,13 @@ Some of the main modifications for items include:
 - Lowered food, water and health gains on most, if not all, foods and drinks
 - Added dysentery chance to canned food
 
+Some of the main modifications for quests include:
+- Raised the amount of quests needed for a tier completion
+- Lowered the duke and exp rewards from quests
+- Lowered the amount of choises in tier completion rewards
+- Lowered the chance to get higher quality items as rewards
+- Reduced the amount of ammo gained from rewards
+
 
 Things I have yet to do:
 - Modify stat display for canned foods with water in them.
-- Modify quest rewards.
-- Modify some loot containers.
