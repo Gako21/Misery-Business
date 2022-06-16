@@ -1,0 +1,64 @@
+<configs>
+
+	<!-- Quests per tier -->
+		<set xpath="/quests/@quests_per_tier">12</set>
+		
+	<!-- Fixed quest rewards -->
+		<removeattribute xpath="/quests/quest//@isfixed"/>
+	
+	<!-- Treasure map treasure's distance -->
+		<set xpath="/quests/quest/objective[@type='TreasureChest']/property[@name='distance']/@value">250-750</set>
+	
+	<!-- Fetch quest exp -->
+		<set xpath="/quests/quest[@id='tier1_fetch']/reward[@type='Exp']/@value">2000</set>
+		<set xpath="/quests/quest[@id='tier2_fetch']/reward[@type='Exp']/@value">3000</set>
+		<set xpath="/quests/quest[@id='tier3_fetch']/reward[@type='Exp']/@value">4000</set>
+		<set xpath="/quests/quest[@id='tier4_fetch']/reward[@type='Exp']/@value">5000</set>
+		<set xpath="/quests/quest[@id='tier5_fetch']/reward[@type='Exp']/@value">9000</set>
+	
+	<!-- Clear quest exp and dukes -->
+		<set xpath="/quests/quest[@id='tier1_clear']/reward[@type='Exp']/@value">2500</set>
+		<set xpath="/quests/quest[@id='tier1_clear']/reward[@type='Item']/@value">500</set>
+		<set xpath="/quests/quest[@id='tier2_clear']/reward[@type='Exp']/@value">3750</set>
+		<set xpath="/quests/quest[@id='tier2_clear']/reward[@type='Item']/@value">800</set>
+		<set xpath="/quests/quest[@id='tier3_clear']/reward[@type='Exp']/@value">5000</set>
+		<set xpath="/quests/quest[@id='tier3_clear']/reward[@type='Item']/@value">1200</set>
+		<set xpath="/quests/quest[@id='tier4_clear']/reward[@type='Exp']/@value">6250</set>
+		<set xpath="/quests/quest[@id='tier4_clear']/reward[@type='Item']/@value">1600</set>
+		<set xpath="/quests/quest[@id='tier5_clear']/reward[@type='Exp']/@value">12500</set>
+		<set xpath="/quests/quest[@id='tier5_clear']/reward[@type='Item']/@value">3200</set>
+	
+	<!-- Restore power quest exp and dukes -->
+		<set xpath="/quests/quest[@id='tier2_restore_power']/reward[@type='Exp']/@value">4250</set>
+		<set xpath="/quests/quest[@id='tier2_restore_power']/reward[@type='Item']/@value">1100</set>
+		<set xpath="/quests/quest[@id='tier3_restore_power']/reward[@type='Exp']/@value">5750</set>
+		<set xpath="/quests/quest[@id='tier3_restore_power']/reward[@type='Item']/@value">1600</set>
+		<set xpath="/quests/quest[@id='tier4_restore_power']/reward[@type='Exp']/@value">7250</set>
+		<set xpath="/quests/quest[@id='tier4_restore_power']/reward[@type='Item']/@value">2100</set>
+	
+	<!-- Fetch and clear quest exp and dukes -->
+		<set xpath="/quests/quest[@id='tier2_fetch_clear']/reward[@type='Exp']/@value">3875</set>
+		<set xpath="/quests/quest[@id='tier2_fetch_clear']/reward[@type='Item']/@value">850</set>
+		<set xpath="/quests/quest[@id='tier3_fetch_clear']/reward[@type='Exp']/@value">5250</set>
+		<set xpath="/quests/quest[@id='tier3_fetch_clear']/reward[@type='Item']/@value">1300</set>
+		<set xpath="/quests/quest[@id='tier4_fetch_clear']/reward[@type='Exp']/@value">6625</set>
+		<set xpath="/quests/quest[@id='tier4_fetch_clear']/reward[@type='Item']/@value">1750</set>
+		<set xpath="/quests/quest[@id='tier5_fetch_clear']/reward[@type='Exp']/@value">13250</set>
+		<set xpath="/quests/quest[@id='tier5_fetch_clear']/reward[@type='Item']/@value">3500</set>
+	
+	<!-- Buried supplies quest exp and dukes -->
+		<set xpath="/quests/quest[@id='tier1_buried_supplies']/reward[@type='Exp']/@value">2000</set>
+		<set xpath="/quests/quest[@id='tier1_buried_supplies']/reward[@type='Item']/@value">350</set>
+		<set xpath="/quests/quest[@id='tier2_buried_supplies']/reward[@type='Item']/@value">560</set>
+		<set xpath="/quests/quest[@id='tier3_buried_supplies']/reward[@type='Exp']/@value">3000</set>
+		<set xpath="/quests/quest[@id='tier3_buried_supplies']/reward[@type='Item']/@value">800</set>
+
+	<!-- Trader biome restriction on special quests -->
+		<remove xpath="/quests/quest[contains(@id, 'nexttrader')]/objective/property[@name='biome_filter_type' or @name='biome_filter']"/>
+	
+	<!-- Trader tier complete reward choise amount -->
+		<set xpath="/quests/quest[@id='quest_tier1complete']/property[@name='reward_choices_count']/@value">2</set>
+		<set xpath="/quests/quest[@id='quest_tier2complete']/property[@name='reward_choices_count']/@value">3</set>
+		<set xpath="/quests/quest[@id='quest_tier3complete']/property[@name='reward_choices_count']/@value">4</set>
+
+</configs>
