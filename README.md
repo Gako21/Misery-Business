@@ -4,16 +4,17 @@ This mod aims to make the survival in 7 Days to Die a bit harder. The purpose is
 This modpack is completely Xml-based, which means it can be installed into a server without requiring the users do the same; it's a server-side mod. It is also divided into smaller sections for you to easily choose which parts of it you want to include in your game.
 
 Some of the main modifications for the player include:
-- Lower movement speed.
-- Lower stamina and health regeneration.
-- Higher food and water consumption.
-- Lower carrying capacity (before being encumbered).
+- Lower movement speed
+- Lower stamina and health regeneration
+- Higher food and water consumption
+- Lower carrying capacity (before being encumbered)
+- Wetness has a greater impact
 
 Some of the main modifications for zombies include:
 - Removed knockdown completely
 - Increased feral sense range
 - Increased pain resist and movement speeds
-- Increased health and radiated health regen.
+- Increased health and radiated health regen
 - Increased chance of inflicting a debuff
 - Decreased exp gain
 
