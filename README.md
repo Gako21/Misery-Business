@@ -31,7 +31,3 @@ Some of the main modifications for quests include:
 - Lowered the amount of choices in tier completion rewards
 - Lowered the chance to get higher quality items as rewards
 - Reduced the amount of ammo gained from rewards
-
-
-Things I have yet to do:
-- Modify stat display for canned foods with water in them.
