@@ -1,0 +1,17 @@
+<configs>
+
+	<append xpath="/ui_display_info/item_display">
+		<item_display_info display_type="foodHoney" display_group="groupConsumables">
+			<display_entry name="$foodAmountAdd" title_key="statFoodAmount"/>
+			<display_entry name="foodHealthAmount" title_key="statHealthAmount"/>
+			<display_entry name="ddummyNoBonus" title_key="statFoodStaminaBonus" display_type="Bool"/>
+			<display_entry name="dCureInfection" title_key="statCureInfection" display_type="Percent"/>
+			<display_entry name="dDysenteryRisk" title_key="statDysenteryRisk" display_type="Percent" negative_preferred="true"/>
+		</item_display_info>
+	</append>
+	
+	<append xpath="/ui_display_info/item_display/item_display_info[@display_type='foodWaterRaw']">
+		<display_entry name="dDysenteryRisk" title_key="statDysenteryRisk" display_type="Percent" negative_preferred="true"/>
+	</append>
+
+</configs>

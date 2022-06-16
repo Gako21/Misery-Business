@@ -4,6 +4,9 @@
 	<set xpath="/items/item//passive_effect[@name='ModPowerBonus' and @tags='EconomicValue']/@value">.15</set>
 	<set xpath="/items/item//passive_effect[@name='ModPowerBonus' and @tags='EconomicValue']/@operation">perc_add</set>
 	<set xpath="/items/item//passive_effect[@name='ModSlots' and @value='1,1,2,2,3,4']/@value">1,1,1,2,2,3</set>
+	
+	<!-- Display type -->
+	<set xpath="/items/item[@name='foodHoney']/property[@name='DisplayType']/@value">foodHoney</set>
 
 	<!-- Medical -->
 	<!-- 		 -->
@@ -52,7 +55,7 @@
 	<set xpath="/items/item/effect_group[@name='Food Tier 0']/triggered_effect[@cvar='$foodAmountAdd']/@value">8</set>
 	<set xpath="/items/item/effect_group[@name='Food Tier 0']/triggered_effect[@cvar='foodHealthAmount']/@value">4</set>
 	<set xpath="/items/item/effect_group[@name='Food Tier 0']/triggered_effect[@cvar='$waterAmountAdd']/@value">7</set>
-	<setattribute xpath="/items/item/effect_group[@name='Food Tier 0']/.." name="EconomicValue">50</setattribute>
+	<set xpath="/items/item/effect_group[@name='Food Tier 0']/../property[@name='EconomicValue']/@value">50</set>
 	
 	<!-- Fix crops back to normal -->
 	<set xpath="/items/item/property[@name='Material' and @value='MresourceCrop']/../effect_group[@name='Food Tier 0']/triggered_effect[@cvar='$foodAmountAdd']/@value">2</set>
