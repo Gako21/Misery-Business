@@ -1,0 +1,7 @@
+<configs>
+
+	<!-- Workstations and their schematics -->
+	<set xpath="/traders/trader_item_groups/trader_item_group[@name='books']/item[@group='schematicsToolsRare']/@prob">.4</set>
+	<setattribute xpath="/traders/trader_item_groups/trader_item_group[@name='traderGeneral']/item[@group='workstations']" name="prob">.4</setattribute>
+
+</configs>

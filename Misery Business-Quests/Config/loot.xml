@@ -9,6 +9,15 @@
 	<!-- MoPower truck -->
 		<setattribute xpath="/lootcontainers/lootgroup[@name='groupMoPower']/item[@group='groupMoPower02' or @group='groupMoPower02']" name="loot_prob_template">med</setattribute>
 		<setattribute xpath="/lootcontainers/lootgroup[@name='groupMoPower']/item[@group='groupMoPower02' or @group='groupMoPower02']" name="force_prob">true</setattribute>
+		
+	<!-- Workstation schematics -->
+		<remove xpath="/lootcontainers/lootgroup[@name='groupCementMixerLoot']/item[@name='cementMixerSchematic']"/>
+		<remove xpath="/lootcontainers/lootgroup[@name='groupWorkbenchLoot04']/item[@name='workbenchSchematic']"/>
+		<remove xpath="/lootcontainers/lootgroup[@name='groupChemistryStationLoot03']/item[@name='chemistryStationSchematic']"/>
+		<remove xpath="/lootcontainers/lootgroup[@name='groupForge']/item[@name='forgeSchematic']"/>
+		
+	<!-- Beakers in chemistry stations -->
+		<set xpath="/lootcontainers/lootgroup[@name='groupChemistryStationLoot']/item[@group='groupChemistryStationLoot03']/@loot_prob_template">veryLow</set>
 	
 	<!-- Quests -->
 	<!-- 		-->
