@@ -9,6 +9,7 @@ Some of the main modifications for the player include:
 - Higher food and water consumption
 - Lower carrying capacity (before being encumbered)
 - Wetness has a greater impact
+- Revamped infection, giving debuffs at 10%, 20%, 35%, 50% and 75%
 
 Some of the main modifications for zombies include:
 - Removed knockdown completely
