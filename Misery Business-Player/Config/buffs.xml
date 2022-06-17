@@ -1,6 +1,372 @@
 <configs>
 
-	<set xpath="/buffs/buff[@name='buffElementWet']/effect_group/triggered_effect[@cvar='$WetTempModifier'][@operation='multiply']/@value">25</set>
-	<set xpath="/buffs/buff[@name='buffElementWet']/effect_group/triggered_effect[@cvar='$WetTempModifierDisplay'][@operation='multiply']/@value">4</set>
+	<!-- Wetness -->
+		<set xpath="/buffs/buff[@name='buffElementWet']/effect_group/triggered_effect[@cvar='$WetTempModifier'][@operation='multiply']/@value">25</set>
+		<set xpath="/buffs/buff[@name='buffElementWet']/effect_group/triggered_effect[@cvar='$WetTempModifierDisplay'][@operation='multiply']/@value">4</set>
+
+	<!-- Infection -->
+	<!-- 		   -->
+	
+		<!-- Set infection progress slower -->
+		<set xpath="/buffs/buff[@name='buffInfectionMain']/effect_group[@name='main loop']/triggered_effect[@value='1.25']/@value">1</set>
+		
+		<!-- Infection stage values-->
+		<set xpath="/buffs/buff[@name='buffInfectionMain']/effect_group/triggered_effect[@trigger='onSelfBuffStart'][@cvar='$infectionStage2Duration'][@operation='set']/@value">10</set>
+		<set xpath="/buffs/buff[@name='buffInfectionMain']/effect_group/triggered_effect[@trigger='onSelfBuffStart'][@cvar='$infectionStage3Duration'][@operation='set']/@value">20</set>
+		
+		<append xpath="/buffs/buff[@name='buffInfectionMain']/effect_group[1]">
+			<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$infectionStage4Duration" operation="set" value="35"/> <!-- % of the full buff duration -->
+			<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$infectionStage5Duration" operation="set" value="50"/> <!-- % of the full buff duration -->
+			<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$infectionStage6Duration" operation="set" value="75"/> <!-- % of the full buff duration -->
+			
+			<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$infectionStage4Duration" operation="multiply" value="@$infectionDisplayDivisor"/>
+			<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$infectionStage5Duration" operation="multiply" value="@$infectionDisplayDivisor"/>
+			<triggered_effect trigger="onSelfBuffStart" action="ModifyCVar" cvar="$infectionStage6Duration" operation="multiply" value="@$infectionDisplayDivisor"/>
+			
+			<triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="$infectionStage4Duration" operation="set" value="0"/>
+			<triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="$infectionStage5Duration" operation="set" value="0"/>
+			<triggered_effect trigger="onSelfBuffRemove" action="ModifyCVar" cvar="$infectionStage6Duration" operation="set" value="0"/>
+		</append>
+
+		<!-- Remove new buffs too when infection ends-->
+		<append xpath="/buffs/buff[@name='buffInfectionMain']/effect_group[@name='shut down']">
+			<triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffInfection04Untreated"/>
+			<triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffInfection04GetBetter"/>
+			<triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffInfection05Untreated"/>
+			<triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffInfection05GetBetter"/>
+			<triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffInfection06Untreated"/>
+			<triggered_effect trigger="onSelfBuffRemove" action="RemoveBuff" buff="buffInfection06GetBetter"/>
+		</append>
+		
+		<!-- Add the buffs to the line -->
+		<append xpath="/buffs/buff[@name='buffInfectionMain']/effect_group[@name='signaling buffs']">
+			<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffInfection04Untreated">
+				<requirement name="!HasBuff" buff="buffInfection04Untreated"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="GTE" value="@$infectionStage4Duration"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionMaxDuration"/>
+				<requirement name="CVarCompare" cvar="$infectionCureCounter" operation="LTE" value="0"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffInfection04GetBetter">
+				<requirement name="!HasBuff" buff="buffInfection04GetBetter"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="GTE" value="@$infectionStage4Duration"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionMaxDuration"/>
+				<requirement name="CVarCompare" cvar="$infectionCureCounter" operation="GT" value="0"/>
+			</triggered_effect>
+			
+			<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffInfection05Untreated">
+				<requirement name="!HasBuff" buff="buffInfection05Untreated"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="GTE" value="@$infectionStage5Duration"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionMaxDuration"/>
+				<requirement name="CVarCompare" cvar="$infectionCureCounter" operation="LTE" value="0"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffInfection05GetBetter">
+				<requirement name="!HasBuff" buff="buffInfection05GetBetter"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="GTE" value="@$infectionStage5Duration"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionMaxDuration"/>
+				<requirement name="CVarCompare" cvar="$infectionCureCounter" operation="GT" value="0"/>
+			</triggered_effect>
+			
+			<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffInfection06Untreated">
+				<requirement name="!HasBuff" buff="buffInfection06Untreated"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="GTE" value="@$infectionStage6Duration"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionMaxDuration"/>
+				<requirement name="CVarCompare" cvar="$infectionCureCounter" operation="LTE" value="0"/>
+			</triggered_effect>
+			<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffInfection06GetBetter">
+				<requirement name="!HasBuff" buff="buffInfection06GetBetter"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="GTE" value="@$infectionStage6Duration"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionMaxDuration"/>
+				<requirement name="CVarCompare" cvar="$infectionCureCounter" operation="GT" value="0"/>
+			</triggered_effect>
+		</append>
+		
+		<!-- Remove the new buffs as well when one infection buff is got -->
+		<append xpath="/buffs/buff[contains(@name, 'buffInfection')]/damage_type[@value='Disease']/../effect_group[1]">
+			<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection04Untreated"/>
+			<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection04GetBetter"/>
+			<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection05Untreated"/>
+			<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection05GetBetter"/>
+			<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection06Untreated"/>
+			<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection06GetBetter"/>
+		</append>
+		
+		<!-- Edit the existing buffs -->
+		
+		<!-- Icon colours -->
+		<set xpath="/buffs/buff[@name='buffInfection02Untreated' or @name='buffInfection02GetBetter']/@icon_color">255, 200, 0</set>
+		<set xpath="/buffs/buff[@name='buffInfection03Untreated' or @name='buffInfection03GetBetter']/@icon_color">255, 162, 0</set>
+
+		<!-- Infection at 0%-10% -->
+		<append xpath="/buffs/buff[@name='buffInfection01Untreated']">
+			<effect_group>
+				<passive_effect name="StaminaChangeOT" operation="perc_add" value="-.1"/>
+			</effect_group>
+		</append>
+		
+		<!-- Cure at 0%-10% -->
+		<append xpath="/buffs/buff[@name='buffInfection01GetBetter']">
+			<effect_group>
+				<passive_effect name="StaminaChangeOT" operation="perc_add" value="-.05"/>
+			</effect_group>
+		</append>
+		
+		<!-- Infection at 10%-20% -->
+		<set xpath="/buffs/buff[@name='buffInfection02Untreated']/effect_group/passive_effect/@value">-.15</set>
+		<append xpath="/buffs/buff[@name='buffInfection02Untreated']">
+			<effect_group>
+				<passive_effect name="HealthMax" operation="perc_add" value="-.05"/>
+				<passive_effect name="StaminaMax" operation="perc_add" value="-.1"/>
+				<passive_effect name="FoodMax" operation="perc_add" value="-.1"/>
+				<passive_effect name="WaterMax" operation="perc_add" value="-.1"/>
+			</effect_group>
+		</append>
+		
+		<!-- Cure at 10%-20% -->
+		<set xpath="/buffs/buff[@name='buffInfection02GetBetter']/effect_group/passive_effect/@value">-.07</set>
+		<append xpath="/buffs/buff[@name='buffInfection02GetBetter']">
+			<effect_group>
+				<passive_effect name="StaminaMax" operation="perc_add" value="-.05"/>
+				<passive_effect name="FoodMax" operation="perc_add" value="-.05"/>
+				<passive_effect name="WaterMax" operation="perc_add" value="-.05"/>
+			</effect_group>
+		</append>
+		
+		<!-- Infection at 20%-35% -->
+		<remove xpath="/buffs/buff[@name='buffInfection03Untreated']/effect_group/passive_effect[@name='AttributeLevel']"/>
+		<set xpath="/buffs/buff[@name='buffInfection03Untreated']/effect_group/passive_effect/@value">-.25</set>
+		<append xpath="/buffs/buff[@name='buffInfection03Untreated']">
+			<effect_group>
+				<passive_effect name="HealthMax" operation="perc_add" value="-.1"/>
+				<passive_effect name="StaminaMax" operation="perc_add" value="-.15"/>
+				<passive_effect name="FoodMax" operation="perc_add" value="-.1"/>
+				<passive_effect name="WaterMax" operation="perc_add" value="-.1"/>
+				<passive_effect name="HypothermalResist" operation="base_add" value="-5"/>
+				<passive_effect name="HyperthermalResist" operation="base_add" value="-5"/>
+			</effect_group>
+		</append>
+		
+		<!-- Cure at 20%-35% -->
+		<remove xpath="/buffs/buff[@name='buffInfection03GetBetter']/effect_group/passive_effect[@name='AttributeLevel']"/>
+		<set xpath="/buffs/buff[@name='buffInfection03GetBetter']/effect_group/passive_effect/@value">-.12</set>
+		<append xpath="/buffs/buff[@name='buffInfection03GetBetter']">
+			<effect_group>
+				<passive_effect name="HealthMax" operation="perc_add" value="-.05"/>
+				<passive_effect name="StaminaMax" operation="perc_add" value="-.07"/>
+				<passive_effect name="FoodMax" operation="perc_add" value="-.05"/>
+				<passive_effect name="WaterMax" operation="perc_add" value="-.05"/>
+			</effect_group>
+		</append>
+		
+		<!-- Declare what the buffs actually are -->
+		
+		<insertAfter xpath="/buffs/buff[@name='buffInfection04']">
+			<!-- Infection at 35%-50% -->
+			<buff name="buffInfection04Untreated" name_key="buffInfection04UntreatedName" description_key="buffInfection04UntreatedDesc" icon="ui_game_symbol_infection" icon_color="255, 123, 0">
+				<damage_type value="Disease"/>
+				<stack_type value="ignore"/>
+				<duration value="0"/>
+				<display_value value=".infectionDisplayPerc"/><display_value_key value="{0:0.0}%"/>
+				<effect_group>
+					<passive_effect name="BuffBlink" operation="base_set" value="2" duration="0,3" tags="buffInfection04Untreated"/>
+
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection01Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection01GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection02Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection02GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection03GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection04GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection05Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection05GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection06Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection06GetBetter"/>
+				</effect_group>
+
+				<effect_group>
+					<passive_effect name="AttributeLevel" operation="base_subtract" value="1" tags="attFortitude,attStrength"/>
+					<triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffPerkAbilityUpdate"/>
+					<triggered_effect trigger="onSelfBuffRemove" action="AddBuff" buff="buffPerkAbilityUpdate"/>
+					<passive_effect name="StaminaChangeOT" operation="perc_add" value="-.35"/>
+					<passive_effect name="HealthMax" operation="perc_add" value="-.15"/>
+					<passive_effect name="StaminaMax" operation="perc_add" value="-.2"/>
+					<passive_effect name="FoodMax" operation="perc_add" value="-.15"/>
+					<passive_effect name="WaterMax" operation="perc_add" value="-.15"/>
+					<passive_effect name="HypothermalResist" operation="base_add" value="-15"/>
+					<passive_effect name="HyperthermalResist" operation="base_add" value="-15"/>
+				</effect_group>
+			</buff>
+			
+			<!-- Cure at 35%-50% -->
+			<buff name="buffInfection04GetBetter" name_key="buffInfection04GetBetterName" description_key="buffInfection04GetBetterDesc" icon="ui_game_symbol_infection_better" icon_color="255, 123, 0">
+				<damage_type value="Disease"/>
+				<stack_type value="ignore"/>
+				<duration value="0"/>
+				<display_value value=".infectionDisplayPerc"/><display_value_key value="{0:0.0}%"/>
+				<effect_group>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection01Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection01GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection02Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection02GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection03Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection04Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection05Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection05GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection06Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection06GetBetter"/>
+				</effect_group>
+
+				<effect_group>
+					<passive_effect name="AttributeLevel" operation="base_subtract" value="1" tags="attFortitude,attStrength"/>
+					<triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffPerkAbilityUpdate"/>
+					<triggered_effect trigger="onSelfBuffRemove" action="AddBuff" buff="buffPerkAbilityUpdate"/>
+					<passive_effect name="StaminaChangeOT" operation="perc_add" value="-.17"/>
+					<passive_effect name="HealthMax" operation="perc_add" value="-.1"/>
+					<passive_effect name="StaminaMax" operation="perc_add" value="-.1"/>
+					<passive_effect name="FoodMax" operation="perc_add" value="-.1"/>
+					<passive_effect name="WaterMax" operation="perc_add" value="-.1"/>
+					<passive_effect name="HypothermalResist" operation="base_add" value="-5"/>
+					<passive_effect name="HyperthermalResist" operation="base_add" value="-5"/>
+				</effect_group>
+			</buff>
+			
+			<!-- Infection at 50%-75% -->
+			<buff name="buffInfection05Untreated" name_key="buffInfection05UntreatedName" description_key="buffInfection05UntreatedDesc" icon="ui_game_symbol_infection" icon_color="255, 72, 0">
+				<damage_type value="Disease"/>
+				<stack_type value="ignore"/>
+				<duration value="0"/>
+				<display_value value=".infectionDisplayPerc"/><display_value_key value="{0:0.0}%"/>
+				<effect_group>
+					<passive_effect name="BuffBlink" operation="base_set" value="2" duration="0,3" tags="buffInfection05Untreated"/>
+
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection01Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection01GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection02Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection02GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection03GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection04Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection04GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection05GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection06Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection06GetBetter"/>
+				</effect_group>
+
+				<effect_group>
+					<passive_effect name="AttributeLevel" operation="base_subtract" value="1"/>
+					<triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffPerkAbilityUpdate"/>
+					<triggered_effect trigger="onSelfBuffRemove" action="AddBuff" buff="buffPerkAbilityUpdate"/>
+					<passive_effect name="StaminaChangeOT" operation="perc_add" value="-.35"/>
+					<passive_effect name="HealthMax" operation="perc_add" value="-.15"/>
+					<passive_effect name="StaminaMax" operation="perc_add" value="-.2"/>
+					<passive_effect name="FoodMax" operation="perc_add" value="-.15"/>
+					<passive_effect name="WaterMax" operation="perc_add" value="-.15"/>
+					<passive_effect name="HypothermalResist" operation="base_add" value="-25"/>
+					<passive_effect name="HyperthermalResist" operation="base_add" value="-25"/>
+					<passive_effect name="Mobility" operation="perc_add" value="-.15"/>
+				</effect_group>
+			</buff>
+			
+			<!-- Cure at 50%-75% -->
+			<buff name="buffInfection05GetBetter" name_key="buffInfection05GetBetterName" description_key="buffInfection05GetBetterDesc" icon="ui_game_symbol_infection_better" icon_color="255, 72, 0">
+				<damage_type value="Disease"/>
+				<stack_type value="ignore"/>
+				<duration value="0"/>
+				<display_value value=".infectionDisplayPerc"/><display_value_key value="{0:0.0}%"/>
+				<effect_group>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection01Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection01GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection02Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection02GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection03Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection04Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection04GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection05Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection06Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection06GetBetter"/>
+				</effect_group>
+
+				<effect_group>
+					<passive_effect name="AttributeLevel" operation="base_subtract" value="1"/>
+					<triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffPerkAbilityUpdate"/>
+					<triggered_effect trigger="onSelfBuffRemove" action="AddBuff" buff="buffPerkAbilityUpdate"/>
+					<passive_effect name="StaminaChangeOT" operation="perc_add" value="-.17"/>
+					<passive_effect name="HealthMax" operation="perc_add" value="-.1"/>
+					<passive_effect name="StaminaMax" operation="perc_add" value="-.1"/>
+					<passive_effect name="FoodMax" operation="perc_add" value="-.1"/>
+					<passive_effect name="WaterMax" operation="perc_add" value="-.1"/>
+					<passive_effect name="HypothermalResist" operation="base_add" value="-15"/>
+					<passive_effect name="HyperthermalResist" operation="base_add" value="-15"/>
+					<passive_effect name="Mobility" operation="perc_add" value="-.1"/>
+				</effect_group>
+			</buff>
+			
+			<!-- Infection at 75+% -->
+			<buff name="buffInfection06Untreated" name_key="buffInfection06UntreatedName" description_key="buffInfection06UntreatedDesc" icon="ui_game_symbol_infection" icon_color="255, 17, 0">
+				<damage_type value="Disease"/>
+				<stack_type value="ignore"/>
+				<duration value="0"/>
+				<display_value value=".infectionDisplayPerc"/><display_value_key value="{0:0.0}%"/>
+				<effect_group>
+					<passive_effect name="BuffBlink" operation="base_set" value="2" duration="0,3" tags="buffInfection06Untreated"/>
+
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection01Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection01GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection02Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection02GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection03GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection04Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection04GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection05Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection05GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection06GetBetter"/>
+				</effect_group>
+
+				<effect_group>
+					<passive_effect name="AttributeLevel" operation="base_subtract" value="2"/>
+					<triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffPerkAbilityUpdate"/>
+					<triggered_effect trigger="onSelfBuffRemove" action="AddBuff" buff="buffPerkAbilityUpdate"/>
+					<passive_effect name="StaminaChangeOT" operation="perc_add" value="-.35"/>
+					<passive_effect name="HealthMax" operation="perc_add" value="-.15"/>
+					<passive_effect name="StaminaMax" operation="perc_add" value="-.2"/>
+					<passive_effect name="FoodMax" operation="perc_add" value="-.15"/>
+					<passive_effect name="WaterMax" operation="perc_add" value="-.15"/>
+					<passive_effect name="HypothermalResist" operation="base_add" value="-35"/>
+					<passive_effect name="HyperthermalResist" operation="base_add" value="-35"/>
+					<passive_effect name="Mobility" operation="perc_add" value="-.15"/>
+				</effect_group>
+			</buff>
+			
+			<!-- Cure at 75+% -->
+			<buff name="buffInfection06GetBetter" name_key="buffInfection06GetBetterName" description_key="buffInfection06GetBetterDesc" icon="ui_game_symbol_infection_better" icon_color="255, 17, 0">
+				<damage_type value="Disease"/>
+				<stack_type value="ignore"/>
+				<duration value="0"/>
+				<display_value value=".infectionDisplayPerc"/><display_value_key value="{0:0.0}%"/>
+				<effect_group>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection01Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection01GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection02Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection02GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection03Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection04Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection04GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection05Untreated"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection05GetBetter"/>
+					<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection06Untreated"/>
+				</effect_group>
+
+				<effect_group>
+					<passive_effect name="AttributeLevel" operation="base_subtract" value="2"/>
+					<triggered_effect trigger="onSelfBuffStart" action="AddBuff" buff="buffPerkAbilityUpdate"/>
+					<triggered_effect trigger="onSelfBuffRemove" action="AddBuff" buff="buffPerkAbilityUpdate"/>
+					<passive_effect name="StaminaChangeOT" operation="perc_add" value="-.17"/>
+					<passive_effect name="HealthMax" operation="perc_add" value="-.1"/>
+					<passive_effect name="StaminaMax" operation="perc_add" value="-.1"/>
+					<passive_effect name="FoodMax" operation="perc_add" value="-.1"/>
+					<passive_effect name="WaterMax" operation="perc_add" value="-.1"/>
+					<passive_effect name="HypothermalResist" operation="base_add" value="-20"/>
+					<passive_effect name="HyperthermalResist" operation="base_add" value="-20"/>
+					<passive_effect name="Mobility" operation="perc_add" value="-.1"/>
+				</effect_group>
+			</buff>
+		</insertAfter>
 
 </configs>
