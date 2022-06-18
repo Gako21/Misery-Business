@@ -43,26 +43,26 @@
 			<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffInfection04Untreated">
 				<requirement name="!HasBuff" buff="buffInfection04Untreated"/>
 				<requirement name="CVarCompare" cvar="infectionCounter" operation="GTE" value="@$infectionStage4Duration"/>
-				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionMaxDuration"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionStage5Duration"/>
 				<requirement name="CVarCompare" cvar="$infectionCureCounter" operation="LTE" value="0"/>
 			</triggered_effect>
 			<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffInfection04GetBetter">
 				<requirement name="!HasBuff" buff="buffInfection04GetBetter"/>
 				<requirement name="CVarCompare" cvar="infectionCounter" operation="GTE" value="@$infectionStage4Duration"/>
-				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionMaxDuration"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionStage5Duration"/>
 				<requirement name="CVarCompare" cvar="$infectionCureCounter" operation="GT" value="0"/>
 			</triggered_effect>
 			
 			<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffInfection05Untreated">
 				<requirement name="!HasBuff" buff="buffInfection05Untreated"/>
 				<requirement name="CVarCompare" cvar="infectionCounter" operation="GTE" value="@$infectionStage5Duration"/>
-				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionMaxDuration"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionStage6Duration"/>
 				<requirement name="CVarCompare" cvar="$infectionCureCounter" operation="LTE" value="0"/>
 			</triggered_effect>
 			<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffInfection05GetBetter">
 				<requirement name="!HasBuff" buff="buffInfection05GetBetter"/>
 				<requirement name="CVarCompare" cvar="infectionCounter" operation="GTE" value="@$infectionStage5Duration"/>
-				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionMaxDuration"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionStage6Duration"/>
 				<requirement name="CVarCompare" cvar="$infectionCureCounter" operation="GT" value="0"/>
 			</triggered_effect>
 			
@@ -79,6 +79,8 @@
 				<requirement name="CVarCompare" cvar="$infectionCureCounter" operation="GT" value="0"/>
 			</triggered_effect>
 		</append>
+		
+		<set xpath="/buffs/buff[@name='buffInfectionMain']/effect_group[@name='signaling buffs']/triggered_effect[@buff='buffInfection03Untreated' or @buff='buffInfection03GetBetter']/requirement[@operation='LT']/@value">@$infectionStage4Duration</set>
 		
 		<!-- Remove the new buffs as well when one infection buff is got -->
 		<append xpath="/buffs/buff[contains(@name, 'buffInfection')]/damage_type[@value='Disease']/../effect_group[1]">
