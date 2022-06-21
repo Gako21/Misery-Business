@@ -56,7 +56,7 @@
 			<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffInfection05Untreated">
 				<requirement name="!HasBuff" buff="buffInfection05Untreated"/>
 				<requirement name="CVarCompare" cvar="infectionCounter" operation="GTE" value="@$infectionStage5Duration"/>
-				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionStage6Duration"/>
+				<requirement name="CVarCompare" cvar="infectionCounter" operation="LT" value="@$infectionMaxDuration"/>
 				<requirement name="CVarCompare" cvar="$infectionCureCounter" operation="LTE" value="0"/>
 			</triggered_effect>
 			<triggered_effect trigger="onSelfBuffUpdate" action="AddBuff" buff="buffInfection05GetBetter">
@@ -90,6 +90,12 @@
 			<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection05GetBetter"/>
 			<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection06Untreated"/>
 			<triggered_effect trigger="onSelfBuffStart" action="RemoveBuff" buff="buffInfection06GetBetter"/>
+		</append>
+		
+		
+		<!-- Blink buffs when hit -->
+		<append xpath="/buffs/buff[@name='buffInfectionGetsWorse']/effect_group/passive_effect/@tags">
+			,buffInfection04GetBetter,buffInfection04Untreated,buffInfection05GetBetter,buffInfection05Untreated,buffInfection06GetBetter,buffInfection06Untreated
 		</append>
 		
 		<!-- Edit the existing buffs -->
