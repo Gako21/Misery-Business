@@ -68,7 +68,7 @@
 		<set xpath="/lootcontainers/lootgroup[@name='groupQuestcasinoCoinT5']/item/@count">10000</set>
 	
 	<!-- Quest reward shape blocks -->
-		<set xpath="/lootcontainers/lootgroup/item[contains(@name, 'VariantHelper')]/@count">150</set>
+		<set xpath="/lootcontainers/lootgroup[contains(@name, 'groupQuest')]/item[contains(@name, 'VariantHelper')]/@count">150</set>
 	
 	<!-- Buried treasure chest -->
 		<set xpath="/lootcontainers/lootgroup[@name='groupBuriedLootStashTreasureSub']/item[@group='rareOres']/@count">3,7</set>
