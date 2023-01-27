@@ -1,0 +1,6 @@
+<configs>
+
+	<set xpath="/gamestages/config/@difficultyBonus">1.5</set>
+	<set xpath="/gamestages/config/@lootBonusEvery">16</set>
+
+</configs>

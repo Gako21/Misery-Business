@@ -9,7 +9,7 @@
 	
 	<!-- Recog/Fort Bites -->
 	<set xpath="/buffs/buff[@name='buffDrugRecog']/effect_group/passive_effect[@name='EntityDamage']/@value">.3</set>
-	<set xpath="/buffs/buff[@name='buffDrugFortBites']/effect_group/passive_effect[@name='HealthLoss']/@value">-.25</set>
+	<set xpath="/buffs/buff[@name='buffDrugFortBites']/effect_group/passive_effect[@name='GeneralDamageResist']/@value">.25</set>
 	
 	<!-- Drink -->
 	<!-- 	   -->

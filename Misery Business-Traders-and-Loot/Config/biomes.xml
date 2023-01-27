@@ -1,0 +1,14 @@
+<configs>
+
+	<set xpath="worldgeneration/biomes/biome[@name='snow']/@lootstage_modifier">0.5</set>
+	<set xpath="worldgeneration/biomes/biome[@name='desert' or @name='burnt_forest']/@lootstage_modifier">0.25</set>
+	<set xpath="worldgeneration/biomes/biome[@name='wasteland']/@lootstage_modifier">0.75</set>
+
+	<set xpath="worldgeneration/biomes/biome/subbiome/@prob">0.15</set>
+	
+	<set xpath="worldgeneration/biomes/biome[@name='snow']/weather[@name='default']/@prob">25</set>
+	<set xpath="worldgeneration/biomes/biome[@name='snow']/weather[@name='fog']/@prob">15</set>
+	<set xpath="worldgeneration/biomes/biome[@name='snow']/weather[@name='snow']/@prob">40</set>
+	<set xpath="worldgeneration/biomes/biome[@name='snow']/weather[@name='storm']/@prob">20</set>
+
+</configs>
